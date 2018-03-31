@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=section, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        section{
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .c-img li{
+          list-style: none;   
+        }
+        .c-img img{
+            border:0;
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        .list{
+            width: 50%;
+            position: absolute;
+            bottom:20px;
+            left: 50%;
+            margin-left:-25%;
+            text-align: center;
+        }
+        .list span{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border:1px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            margin:0 3px;
+        }
+        .list span:hover{
+            background-color: #fff;
+        }
+        .s-active{
+            background-color: #fff;
+        }
+        .item{
+            display: none;
+        }
+        .active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <ul class='c-img' id='c-img'>
+            <li class='item active'><a href="#"><img src="img/banner1.jpg" alt=""></a></li>
+            <li class='item'><a href="#"><img src="img/banner2.jpg" alt=""></a></li>
+            <li class='item'><a href="#"><img src="img/banner3.jpg" alt=""></a></li>
+            <li class='item'><a href="#"><img src="img/banner4.jpg" alt=""></a></li>
+            <li class='item'><a href="#"><img src="img/banner5.jpg" alt=""></a></li>
+        </ul>
+        <div class='list' id='list'>
+            <span  class='s-active'></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </section>
+    <script>
+        var list=document.getElementById('list').children;
+        var c_img=document.getElementById('c-img').children;
+        var i_img=0;
+        // console.log(list)
+        // console.log(c_img);
+        for(var i=0;i<list.length;i++){
+            list[i].index = i;
+            list[i].onmouseover=function(){
+                for(var j=0;j<list.length;j++){
+                    list[j].className='';
+                    c_img[j].className='item'
+                }
+                this.className='s-active';
+                // console.log(this.index)
+                c_img[this.index].className='item active';
+                i_img=this.index;
+                return i_img;
+            }
+        }
+       var timer=setInterval(function(){
+           for(var i=0;i<c_img.length;i++){
+               c_img[i].className='item';
+               list[i].className='';
+           }
+           if(i_img<c_img.length){
+                c_img[i_img].className='item active';
+                list[i_img].className='s-active';
+           }else{
+              i_img=0;
+              c_img[i_img].className='item active';
+              list[i_img].className='s-active';
+           }
+           i_img+=1;
+       },3000)
+    </script>
+</body>
+</html>
